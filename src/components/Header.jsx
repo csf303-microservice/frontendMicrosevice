@@ -8,11 +8,13 @@ import { useLogoutMutation } from '../slices/usersApiSlice'
 import { logout } from '../slices/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+
 function Header() {
+    const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const [logoutApiCall] = useLogoutMutation()
+
     const logoutHandler = async () => {
         try {
             await logoutApiCall().unwrap();
@@ -22,6 +24,7 @@ function Header() {
             console.log(err);
         }
     }
+
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
